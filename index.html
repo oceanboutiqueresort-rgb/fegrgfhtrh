@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà nghỉ Thanh Bình Bến Tre - Ấm cúng & Thân thiện</title>
+    <!-- Font Awesome cho icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #f9f7f3;
+            color: #2d2d2d;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            transition: background 0.3s;
+        }
+
+        /* Hiệu ứng fade in khi tải trang */
+        .fade-in {
+            animation: fadeIn 1.2s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hiệu ứng chuyển trang cho các section */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header & Background */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/831670563.jpg?k=9552987ca035ec4a79b7601ea3d75bfc3b3aa007fdac7c77fa17e217f918bbd4&o=') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1.8rem;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero .address {
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(6px);
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Nút liên hệ nhanh */
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .btn-zalo {
+            background: #0068ff;
+            color: white;
+        }
+
+        .btn-zalo:hover {
+            background: #0052cc;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(0,104,255,0.4);
+        }
+
+        .btn-fb {
+            background: #1877f2;
+            color: white;
+        }
+
+        .btn-fb:hover {
+            background: #0e5fc9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(24,119,242,0.4);
+        }
+
+        .btn-phone {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-phone:hover {
+            background: #1e7e34;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(40,167,69,0.4);
+        }
+
+        /* Container chung */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #2d5a3b;
+            margin-bottom: 0.8rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background: #f0b429;
+            margin: 0.6rem auto 0;
+            border-radius: 4px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #5a5a5a;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tiện ích */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        .amenity-card {
+            background: white;
+            padding: 2rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            transition: all 0.35s ease;
+            border: 1px solid #eee;
+        }
+
+        .amenity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(45, 90, 59, 0.12);
+            border-color: #d4e8d9;
+        }
+
+        .amenity-card i {
+            font-size: 2.5rem;
+            color: #2d5a3b;
+            margin-bottom: 0.8rem;
+        }
+
+        .amenity-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .amenity-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Phòng */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(45, 90, 59, 0.15);
+        }
+
+        .room-images {
+            display: flex;
+            height: 220px;
+        }
+
+        .room-images img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-images img {
+            transform: scale(1.04);
+        }
+
+        .room-info {
+            padding: 1.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-info h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d5a3b;
+            margin-bottom: 0.4rem;
+        }
+
+        .room-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #f0b429;
+            margin-bottom: 0.8rem;
+        }
+
+        .room-price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #888;
+        }
+
+        .room-features {
+            list-style: none;
+            margin: 1rem 0;
+            flex: 1;
+        }
+
+        .room-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .room-features li i {
+            color: #2d5a3b;
+            width: 18px;
+            font-size: 0.9rem;
+        }
+
+        .btn-book {
+            background: #2d5a3b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            display: inline-block;
+            align-self: flex-start;
+        }
+
+        .btn-book:hover {
+            background: #1e3e29;
+            transform: scale(1.03);
+            box-shadow: 0 8px 18px rgba(45,90,59,0.3);
+        }
+
+        /* Liên hệ */
+        .contact-section {
+            background: linear-gradient(135deg, #2d5a3b 0%, #1e3e29 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .contact-section .section-title {
+            color: white;
+        }
+
+        .contact-section .section-title::after {
+            background: #f0b429;
+        }
+
+        .contact-section .section-subtitle {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.15rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-4px);
+        }
+
+        .contact-item i {
+            font-size: 1.6rem;
+            color: #f0b429;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-social i {
+            font-size: 1.3rem;
+        }
+
+        .btn-social.zalo {
+            background: #0068ff;
+            color: white;
+        }
+
+        .btn-social.zalo:hover {
+            background: #0052cc;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0,104,255,0.5);
+        }
+
+        .btn-social.fb {
+            background: #1877f2;
+            color: white;
+        }
+
+        .btn-social.fb:hover {
+            background: #0e5fc9;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(24,119,242,0.5);
+        }
+
+        .btn-social.phone {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-social.phone:hover {
+            background: #1e7e34;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(40,167,69,0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a2e22;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.95rem;
+        }
+
+        footer strong {
+            color: #f0b429;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                white-space: normal;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                font-size: 0.95rem;
+                padding: 0.8rem 1.2rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-social {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .room-images {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .container {
+                padding: 2.5rem 1.2rem;
+            }
+
+            .room-images {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .room-images img {
+                width: 100%;
+                height: 160px;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .amenity-card {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .amenity-card i {
+                font-size: 1.8rem;
+            }
+
+            .amenity-card h3 {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Nút cuộn lên đầu trang */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2d5a3b;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 999;
+            border: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: #1e3e29;
+            transform: translateY(-5px) scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero / Background chính -->
+    <section class="hero fade-in">
+        <div class="hero-content">
+            <h1>Nhà nghỉ Thanh Bình</h1>
+            <p>Bến Tre – Ấm cúng & Thân thiện</p>
+            <div class="address">
+                <i class="fas fa-map-pin" style="margin-right: 8px;"></i>
+                Số 3 Nguyễn Thị Định, Phú Hưng, Bến Tre
+            </div>
+            <div class="contact-buttons">
+                <a href="https://zalo.me/0962559133" class="btn btn-zalo" target="_blank">
+                    <i class="fas fa-comment-dots"></i> Zalo: 0962 559 133
+                </a>
+                <a href="https://zalo.me/0367723979" class="btn btn-zalo" target="_blank">
+                    <i class="fas fa-comment-dots"></i> Zalo: 0367 723 979
+                </a>
+                <a href="https://www.facebook.com/share/1F9fWZCs5n/?mibextid=wwXIfr" class="btn btn-fb" target="_blank">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiện ích -->
+    <section class="container section" id="amenities">
+        <h2 class="section-title">Tiện ích</h2>
+        <p class="section-subtitle">Nhà nghỉ Thanh Bình mang đến không gian nghỉ dưỡng thoải mái, tiện nghi và ấm cúng.</p>
+        <div class="amenities-grid">
+            <div class="amenity-card">
+                <i class="fas fa-wifi"></i>
+                <h3>Wi-Fi miễn phí</h3>
+                <p>Kết nối tốc độ cao toàn khu vực</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-snowflake"></i>
+                <h3>Điều hòa</h3>
+                <p>Mát lạnh, dễ chịu mọi phòng</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-tv"></i>
+                <h3>Truyền hình cáp</h3>
+                <p>Đa dạng kênh giải trí</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-parking"></i>
+                <h3>Bãi đỗ xe</h3>
+                <p>Rộng rãi, an toàn miễn phí</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-mug-hot"></i>
+                <h3>Nước uống</h3>
+                <p>Nước suối, trà, cà phê miễn phí</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-broom"></i>
+                <h3>Dọn phòng</h3>
+                <p>Hàng ngày, sạch sẽ</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-clock"></i>
+                <h3>Lễ tân 24/7</h3>
+                <p>Hỗ trợ bất cứ lúc nào</p>
+            </div>
+            <div class="amenity-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>An ninh</h3>
+                <p>Camera, bảo vệ 24/24</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Danh sách phòng -->
+    <section class="container section" id="rooms" style="background: #f3f0e9; border-radius: 40px; margin-bottom: 2rem;">
+        <h2 class="section-title">Các loại phòng</h2>
+        <p class="section-subtitle">Phòng đơn và phòng đôi được thiết kế ấm cúng, đầy đủ tiện nghi, giá cả hợp lý.</p>
+        <div class="rooms-grid">
+            <!-- Phòng đơn -->
+            <div class="room-card">
+                <div class="room-images">
+                    <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/831670972.jpg?k=d6fb441c47737ccf03d925cd434716b9478d5015bd39262b294db333e9521583&o=" alt="Phòng đơn 1">
+                    <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/830332335.jpg?k=25e9c53eefda655489e88e40736983523eb556473af0e6682f878b87d3ee95a2&o=" alt="Phòng đơn 2">
+                </div>
+                <div class="room-info">
+                    <h3>Phòng Đơn</h3>
+                    <div class="room-price">200.000 <span>VNĐ/đêm</span></div>
+                    <ul class="room-features">
+                        <li><i class="fas fa-bed"></i> 1 giường đơn 1m2</li>
+                        <li><i class="fas fa-wind"></i> Điều hòa, quạt máy</li>
+                        <li><i class="fas fa-tv"></i> TV truyền hình cáp</li>
+                        <li><i class="fas fa-bath"></i> Phòng tắm nước nóng</li>
+                        <li><i class="fas fa-wifi"></i> Wi-Fi miễn phí</li>
+                    </ul>
+                    <a href="https://zalo.me/0962559133" class="btn-book" target="_blank">
+                        <i class="fas fa-calendar-check"></i> Đặt phòng ngay
+                    </a>
+                </div>
+            </div>
+
+            <!-- Phòng đôi -->
+            <div class="room-card">
+                <div class="room-images">
+                    <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/830332338.jpg?k=10a85a4a44a5e8a6ae612264b3f3522a500503efad4e19c376e2bb5bd0fb642a&o=" alt="Phòng đôi 1">
+                    <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/829450520.jpg?k=ceaa34d58b5c521df1b073054982a70e7ac01392cb6b59bdb4fe281388fbc745&o=" alt="Phòng đôi 2">
+                </div>
+                <div class="room-info">
+                    <h3>Phòng Đôi</h3>
+                    <div class="room-price">280.000 <span>VNĐ/đêm</span></div>
+                    <ul class="room-features">
+                        <li><i class="fas fa-bed"></i> 1 giường đôi 1m6</li>
+                        <li><i class="fas fa-wind"></i> Điều hòa, quạt máy</li>
+                        <li><i class="fas fa-tv"></i> TV truyền hình cáp</li>
+                        <li><i class="fas fa-bath"></i> Phòng tắm nước nóng</li>
+                        <li><i class="fas fa-wifi"></i> Wi-Fi miễn phí</li>
+                        <li><i class="fas fa-couch"></i> Không gian rộng rãi</li>
+                    </ul>
+                    <a href="https://zalo.me/0367723979" class="btn-book" target="_blank">
+                        <i class="fas fa-calendar-check"></i> Đặt phòng ngay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liên hệ -->
+    <section class="contact-section section" id="contact">
+        <h2 class="section-title">Liên hệ với chúng tôi</h2>
+        <p class="section-subtitle">Đặt phòng trực tiếp qua Zalo, Facebook hoặc gọi điện để được hỗ trợ nhanh nhất.</p>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Số 3 Nguyễn Thị Định, Phú Hưng, Bến Tre</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <a href="tel:0962559133">0962 559 133</a> &nbsp;–&nbsp; 
+                <a href="tel:0367723979">0367 723 979</a>
+            </div>
+        </div>
+
+        <div class="social-buttons">
+            <a href="https://zalo.me/0962559133" class="btn-social zalo" target="_blank">
+                <i class="fas fa-comment-dots"></i> Zalo 1
+            </a>
+            <a href="https://zalo.me/0367723979" class="btn-social zalo" target="_blank">
+                <i class="fas fa-comment-dots"></i> Zalo 2
+            </a>
+            <a href="https://www.facebook.com/share/1F9fWZCs5n/?mibextid=wwXIfr" class="btn-social fb" target="_blank">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="tel:0962559133" class="btn-social phone">
+                <i class="fas fa-phone-alt"></i> Gọi ngay
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 <strong>Nhà nghỉ Thanh Bình Bến Tre</strong> – Ấm cúng, thân thiện, chu đáo.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Địa chỉ: Số 3 Nguyễn Thị Định, Phú Hưng, Bến Tre, Việt Nam</p>
+    </footer>
+
+    <!-- Nút cuộn lên đầu trang -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="Lên đầu trang">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Hiệu ứng chuyển trang: Intersection Observer cho các section
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Nút cuộn lên đầu trang
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Hiệu ứng mượt khi click vào các liên kết nội bộ (nếu có)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
